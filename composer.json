@@ -1,0 +1,20 @@
+{
+    "name": "ram/mt5apiwrapper",
+    "description": "A php wrapper to integrate with MT5 Web Integration Kit (WIK)",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ram Kumar",
+            "email": "ramkumar15685@gmail.com"
+        }
+    ],
+    "require": {
+        "doctrine/annotations": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ram\\WIK\\": "src/"
+        }
+    }
+}
