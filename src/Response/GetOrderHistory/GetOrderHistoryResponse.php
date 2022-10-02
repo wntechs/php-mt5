@@ -49,7 +49,7 @@ class GetOrderHistoryResponse extends BaseResponse
         $lines = explode(PHP_EOL, $answer);
         foreach ($lines as $line) {
             if(strlen($line) > 0)
-                $this->answer[] = new GetOrderHistoryResponse($line);
+                $this->answer[] = new OrderHistoryScsvLine($line);
         }
         return $this;
     }

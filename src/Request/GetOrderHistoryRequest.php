@@ -18,9 +18,9 @@ class GetOrderHistoryRequest extends BaseRequest
 
 
     /**
-     * @var string[]
+     * @var string
      */
-    protected array $logins;
+    protected string $logins;
 
     /**
      * @return int
@@ -59,20 +59,21 @@ class GetOrderHistoryRequest extends BaseRequest
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function getLogins(): array
+    public function getLogins(): string
     {
         return $this->logins;
     }
 
     /**
-     * @param array $logins
+     * @param string $logins
      * @return GetOrderHistoryRequest
      */
-    public function setLogins(array $logins): GetOrderHistoryRequest
+    public function setLogins(string $logins): GetOrderHistoryRequest
     {
-        $this->logins = $logins;
+
+            $this->logins =  $logins;
         return $this;
     }
 

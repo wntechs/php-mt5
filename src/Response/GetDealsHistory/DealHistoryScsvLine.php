@@ -36,7 +36,7 @@ class DealHistoryScsvLine  extends Arrayable
     protected float $margin_rate;
     protected float $profit_raw;
     protected float $profit_rate;
-    protected int $reason;
+    protected string $reason;
     protected float $swaps;
     protected string $comment;
     protected float $tick_size;
@@ -462,18 +462,18 @@ class DealHistoryScsvLine  extends Arrayable
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getReason(): int
+    public function getReason(): string
     {
         return $this->reason;
     }
 
     /**
-     * @param int $reason
+     * @param string $reason
      * @return DealHistoryScsvLine
      */
-    public function setReason(int $reason): DealHistoryScsvLine
+    public function setReason(string $reason): DealHistoryScsvLine
     {
         $this->reason = $reason;
         return $this;

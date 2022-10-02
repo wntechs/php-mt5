@@ -7,10 +7,7 @@ class GetDealsHistoryRequest extends BaseRequest
     protected string $action = 'getdealshistory';
     protected int $from;
     protected int $to;
-    /**
-     * @var string[]
-     */
-    protected array $logins;
+    protected string $logins;
 
     /**
      * @return string
@@ -58,18 +55,18 @@ class GetDealsHistoryRequest extends BaseRequest
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function getLogins(): array
+    public function getLogins(): string
     {
         return $this->logins;
     }
 
     /**
-     * @param array $logins
+     * @param string $logins
      * @return GetDealsHistoryRequest
      */
-    public function setLogins(array $logins): GetDealsHistoryRequest
+    public function setLogins(string $logins): GetDealsHistoryRequest
     {
         $this->logins = $logins;
         return $this;

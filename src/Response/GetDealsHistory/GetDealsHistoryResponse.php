@@ -66,7 +66,7 @@ class GetDealsHistoryResponse extends BaseResponse
         $lines = explode(PHP_EOL, $answer);
         foreach ($lines as $line) {
             if(strlen($line) > 0)
-                $this->answer[] = new GetDealsHistoryResponse($line);
+                $this->answer[] = new DealHistoryScsvLine($line);
         }
         return $this;
     }
