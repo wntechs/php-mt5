@@ -6,12 +6,12 @@ use Ram\WIK\Response\BaseResponse;
 
 class GetUsersOnlineResponse extends BaseResponse
 {
-    protected int $count;
+    protected int $count = 0;
 
     /**
      * @var \Ram\WIK\Response\GetUsersOnline\UserOnlineScsvLine[]
      */
-    protected array $answer;
+    protected array $answer = [];
 
     /**
      * @return int
@@ -48,7 +48,7 @@ class GetUsersOnlineResponse extends BaseResponse
         $lines = explode(PHP_EOL, $answer);
         foreach ($lines as $line) {
             if(strlen($line) > 0)
-                $this->answer[] = new GetUsersOnlineResponse($line);
+                $this->answer[] = new UserOnlineScsvLine($line);
         }
         return $this;
     }

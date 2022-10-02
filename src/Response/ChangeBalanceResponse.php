@@ -5,9 +5,9 @@ namespace Ram\WIK\Response;
 class ChangeBalanceResponse extends BaseResponse
 {
 
-    protected string $login;
-    protected string $deal;
-    protected string $newbalance;
+    protected string $login = '';
+    protected string $deal = '';
+    protected string $newbalance = '';
 
 
     /**

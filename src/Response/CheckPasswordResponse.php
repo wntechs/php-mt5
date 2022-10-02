@@ -4,7 +4,7 @@ namespace Ram\WIK\Response;
 
 class CheckPasswordResponse extends BaseResponse
 {
-    protected int $login;
+    protected int $login = 0;
 
     /**
      * @return int

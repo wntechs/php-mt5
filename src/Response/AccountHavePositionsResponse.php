@@ -4,8 +4,8 @@ namespace Ram\WIK\Response;
 
 class AccountHavePositionsResponse extends BaseResponse
 {
-    protected int $positions;
-    protected int $login;
+    protected int $positions = 0;
+    protected int $login = 0;
 
     /**
      * @return int

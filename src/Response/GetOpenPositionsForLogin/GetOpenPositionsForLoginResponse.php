@@ -9,7 +9,7 @@ class GetOpenPositionsForLoginResponse extends BaseResponse
     /**
      * @var \Ram\WIK\Response\GetOpenPositionsForLogin\OpenPositionScsvLine[]
      */
-    protected array $answer;
+    protected array $answer = [];
 
     /**
      * @return array
@@ -28,7 +28,7 @@ class GetOpenPositionsForLoginResponse extends BaseResponse
         $lines = explode(PHP_EOL, $answer);
         foreach ($lines as $line) {
             if(strlen($line) > 0)
-                $this->answer[] = new GetOpenPositionsForLoginResponse($line);
+                $this->answer[] = new OpenPositionScsvLine($line);
         }
         return $this;
     }

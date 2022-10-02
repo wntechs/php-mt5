@@ -6,12 +6,12 @@ use Ram\WIK\Response\BaseResponse;
 
 class GetChartHistoryResponse extends BaseResponse
 {
-    protected int $count;
+    protected int $count = 0;
 
     /**
      * @var \Ram\WIK\Response\GetChartHistory\ChartHistoryScsvLine[]
      */
-    protected array $answer;
+    protected array $answer = [];
 
     /**
      * @return int
@@ -48,7 +48,7 @@ class GetChartHistoryResponse extends BaseResponse
         $lines = explode(PHP_EOL, $answer);
         foreach ($lines as $line) {
             if(strlen($line) > 0)
-                $this->answer[] = new GetChartHistoryResponse($line);
+                $this->answer[] = new ChartHistoryScsvLine($line);
         }
         return $this;
     }

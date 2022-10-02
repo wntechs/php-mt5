@@ -4,7 +4,7 @@ namespace Ram\WIK\Response;
 
 class InfoResponse extends BaseResponse
 {
-    protected string $info;
+    protected string $info = '';
 
     /**
      * @return string

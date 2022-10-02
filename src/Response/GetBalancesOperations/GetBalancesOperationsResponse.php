@@ -7,12 +7,12 @@ use Ram\WIK\Response\BaseResponse;
 class GetBalancesOperationsResponse extends BaseResponse
 {
 
-    protected string $login;
+    protected string $login = '';
 
     /**
      * @var \Ram\WIK\Response\GetBalancesOperations\BalanceOperationScsvLine[]
      */
-    protected array $answer;
+    protected array $answer = [];
 
     /**
      * @return string
@@ -49,7 +49,7 @@ class GetBalancesOperationsResponse extends BaseResponse
         $lines = explode(PHP_EOL, $answer);
         foreach ($lines as $line) {
             if(strlen($line) > 0)
-                $this->answer[] = new GetBalancesOperationsResponse($line);
+                $this->answer[] = new BalanceOperationScsvLine($line);
         }
         return $this;
     }

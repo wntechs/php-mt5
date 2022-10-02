@@ -4,9 +4,9 @@ namespace Ram\WIK;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
-use Annotations\RewriteAnnotation;
 
 
+use Ram\WIK\Annotations\RewriteAnnotation;
 use ReflectionClass;
 // Deprecated and will be removed in 2.0 but currently needed
 AnnotationRegistry::registerLoader('class_exists');

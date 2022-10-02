@@ -4,7 +4,7 @@ namespace Ram\WIK\Response;
 
 class CreateGroupResponse extends BaseResponse
 {
-    protected string $name;
+    protected string $name = '';
 
     /**
      * @return string

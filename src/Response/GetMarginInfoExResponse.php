@@ -4,13 +4,13 @@ namespace Ram\WIK\Response;
 
 class GetMarginInfoExResponse extends BaseResponse
 {
-    protected int $users;
-    protected float $balance;
-    protected float $credit;
-    protected float $equity;
-    protected float $margin;
-    protected float $freeMargin;
-    protected string $failed_logins;
+    protected int $users = 0;
+    protected float $balance = 0;
+    protected float $credit = 0;
+    protected float $equity = 0;
+    protected float $margin = 0;
+    protected float $freeMargin = 0;
+    protected string $failed_logins = '';
 
     /**
      * @var \Ram\WIK\Response\GetMarginInfo\MarginIfnoScsvLine[]

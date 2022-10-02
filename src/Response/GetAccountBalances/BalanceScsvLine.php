@@ -14,6 +14,10 @@ class BalanceScsvLine extends Arrayable
     protected int $login;
     protected float $balance;
 
+    public function __construct(string $line)
+    {
+        $this->parseCsv($line);
+    }
     /**
      * @return int
      */

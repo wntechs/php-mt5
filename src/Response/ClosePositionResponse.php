@@ -7,9 +7,9 @@ class ClosePositionResponse extends BaseResponse
     /**
      * @var string[]
      */
-    protected array $position;
+    protected array $position = [];
 
-    protected string $failed_positions;
+    protected string $failed_positions = '';
 
     /**
      * @return array

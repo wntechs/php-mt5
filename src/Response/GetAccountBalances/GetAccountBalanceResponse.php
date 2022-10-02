@@ -6,12 +6,12 @@ use Ram\WIK\Response\BaseResponse;
 
 class GetAccountBalanceResponse extends BaseResponse
 {
-    protected int $users;
+    protected int $users = 0;
 
     /**
      * @var \Ram\WIK\Response\GetAccountBalances\BalanceScsvLine[]
      */
-    protected array $answer;
+    protected array $answer = [];
 
     /**
      * @return int
@@ -48,7 +48,7 @@ class GetAccountBalanceResponse extends BaseResponse
         $lines = explode(PHP_EOL, $answer);
         foreach ($lines as $line) {
             if(strlen($line) > 0)
-                $this->answer[] = new GetAccountBalanceResponse($line);
+                $this->answer[] = new BalanceScsvLine($line);
         }
         return $this;
     }

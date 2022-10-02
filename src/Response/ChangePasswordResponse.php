@@ -4,7 +4,7 @@ namespace Ram\WIK\Response;
 
 class ChangePasswordResponse extends BaseResponse
 {
-    protected int $login;
+    protected int $login = 0;
 
     /**
      * @return int

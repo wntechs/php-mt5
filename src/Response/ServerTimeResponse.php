@@ -4,7 +4,7 @@ namespace Ram\WIK\Response;
 
 class ServerTimeResponse extends BaseResponse
 {
-    protected string $time;
+    protected string $time = '';
 
     /**
      * @return string

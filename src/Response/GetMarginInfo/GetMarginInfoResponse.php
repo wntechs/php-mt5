@@ -6,13 +6,13 @@ use Ram\WIK\Response\BaseResponse;
 
 class GetMarginInfoResponse extends BaseResponse
 {
-    protected int $users;
-    protected float $balance;
-    protected float $equity;
-    protected float $margin;
-    protected float $free_margin;
-    protected float $credit;
-    protected string $failed_logins;
+    protected int $users = 0;
+    protected float $balance = 0;
+    protected float $equity = 0;
+    protected float $margin = 0;
+    protected float $free_margin = 0;
+    protected float $credit = 0;
+    protected string $failed_logins = '';
 
     /**
      * @var \Ram\WIK\Response\GetMarginInfo\MarginIfnoScsvLine[]
@@ -162,7 +162,7 @@ class GetMarginInfoResponse extends BaseResponse
         $lines = explode(PHP_EOL, $answer);
         foreach ($lines as $line) {
             if(strlen($line) > 0)
-                $this->answer[] = new GetMarginInfoResponse($line);
+                $this->answer[] = new MarginIfnoScsvLine($line);
         }
         return $this;
     }

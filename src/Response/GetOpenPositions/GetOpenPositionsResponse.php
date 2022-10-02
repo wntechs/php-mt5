@@ -3,13 +3,14 @@
 namespace Ram\WIK\Response\GetOpenPositions;
 
 use Ram\WIK\Response\BaseResponse;
+use Ram\WIK\Response\GetOpenPositionsForLogin\OpenPositionScsvLine;
 
 class GetOpenPositionsResponse extends BaseResponse
 {
     /**
      * @var \Ram\WIK\Response\GetOpenPositionsForLogin\OpenPositionScsvLine[]
      */
-    protected array $answer;
+    protected array $answer = [];
 
     /**
      * @return array
@@ -28,7 +29,7 @@ class GetOpenPositionsResponse extends BaseResponse
         $lines = explode(PHP_EOL, $answer);
         foreach ($lines as $line) {
             if(strlen($line) > 0)
-                $this->answer[] = new GetOpenPositionsResponse($line);
+                $this->answer[] = new OpenPositionScsvLine($line);
         }
         return $this;
     }

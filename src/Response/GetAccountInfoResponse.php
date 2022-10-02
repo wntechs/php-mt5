@@ -4,26 +4,26 @@ namespace Ram\WIK\Response;
 
 class GetAccountInfoResponse extends BaseResponse
 {
-    protected string $login;
-    protected string $name;
-    protected string $email;
-    protected string $group;
-    protected int $leverage;
-    protected string $regdate;
-    protected string $country;
-    protected string $state;
-    protected string $address;
-    protected string $phone;
-    protected string $city;
-    protected string $zipcode;
-    protected string $rights;
-    protected float $balance;
-    protected string $comment;
-    protected float $free_margin;
-    protected string $opened_positions;
-    protected string $agent_account;
-    protected string $lastdate;
-    protected string $id;
+    protected string $login ='';
+    protected string $name ='';
+    protected string $email ='';
+    protected string $group ='';
+    protected int $leverage = 0;
+    protected string $regdate ='';
+    protected string $country ='';
+    protected string $state ='';
+    protected string $address ='';
+    protected string $phone ='';
+    protected string $city ='';
+    protected string $zipcode ='';
+    protected string $rights ='';
+    protected float $balance = 0;
+    protected string $comment ='';
+    protected float $free_margin = 0;
+    protected string $opened_positions ='';
+    protected string $agent_account ='';
+    protected string $lastdate ='';
+    protected string $id ='';
 
     /**
      * @return string

@@ -4,7 +4,7 @@ namespace Ram\WIK\Response;
 
 class GetLoginsByGroupResponse extends BaseResponse
 {
-    protected string $logins;
+    protected string $logins = '';
 
     /**
      * @return string

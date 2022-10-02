@@ -7,7 +7,7 @@ class ListResponse extends BaseResponse
     /**
      * @var string[]
      */
-    protected array $actions;
+    protected array $actions = [];
 
     /**
      * @return array

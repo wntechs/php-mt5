@@ -4,7 +4,7 @@ namespace Ram\WIK\Response;
 
 class OpenOrderResponse extends BaseResponse
 {
-    protected string $orderid;
+    protected string $orderid = '';
 
     /**
      * @return string

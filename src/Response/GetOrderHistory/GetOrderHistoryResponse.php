@@ -6,13 +6,13 @@ use Ram\WIK\Response\BaseResponse;
 
 class GetOrderHistoryResponse extends BaseResponse
 {
-    protected int $items;
+    protected int $items = 0;
 
     /**
      * @var \Ram\WIK\Response\GetOrderHistory\OrderHistoryScsvLine[]
      */
-    protected array $answer;
-    protected string $failed_logins;
+    protected array $answer = [];
+    protected string $failed_logins = '';
 
     /**
      * @return int

@@ -4,7 +4,7 @@ namespace Ram\WIK\Response;
 
 class GetVersionResponse extends BaseResponse
 {
-    protected string $version;
+    protected string $version = '';
 
     /**
      * @return string

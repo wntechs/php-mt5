@@ -10,7 +10,7 @@ class GetAccountsResponse extends BaseResponse
     /**
      * @var \Ram\WIK\Response\GetAccounts\AccountScsvLine[]
      */
-    protected array $answer;
+    protected array $answer = [];
 
 
     /**

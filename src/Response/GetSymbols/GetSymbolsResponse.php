@@ -7,11 +7,11 @@ use Ram\WIK\Response\ResponseParser;
 
 class GetSymbolsResponse extends BaseResponse
 {
-    protected int $symbolsCount;
+    protected int $symbolsCount = 0;
     /**
      * @var \Ram\WIK\Response\GetSymbols\SymbolScsvLine[]
      */
-    protected array $answer;
+    protected array $answer = [];
 
 
 

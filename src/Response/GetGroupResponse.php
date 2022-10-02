@@ -5,26 +5,26 @@ namespace Ram\WIK\Response;
 class GetGroupResponse extends BaseResponse
 {
 
-    protected string $name;
-    protected string $currency;
-    protected string $company;
-    protected string $reports_email;
-    protected string $support_email;
-    protected string $templates;
-    protected int $enable_connections;
-    protected int $leverage_by_default;
-    protected float $deposit_by_default;
-    protected int $send_copies_to_support_email;
-    protected int $generate_daily_reports;
-    protected float $margin_call;
-    protected int $margin_mode;
-    protected string $news;
-    protected float $stop_out_level;
-    protected string $check_ie_prices;
-    protected int $maximum_positions_count;
-    protected float $annual_interest_rate;
-    protected int $enable_charge_of_swaps;
-    protected int $margin_type;
+    protected string $name ='';
+    protected string $currency ='';
+    protected string $company ='';
+    protected string $reports_email ='';
+    protected string $support_email ='';
+    protected string $templates ='';
+    protected int $enable_connections = 0;
+    protected int $leverage_by_default = 0;
+    protected float $deposit_by_default = 0;
+    protected int $send_copies_to_support_email = 0;
+    protected int $generate_daily_reports = 0;
+    protected float $margin_call = 0;
+    protected int $margin_mode = 0;
+    protected string $news = '';
+    protected float $stop_out_level = 0;
+    protected string $check_ie_prices ='';
+    protected int $maximum_positions_count = 0;
+    protected float $annual_interest_rate = 0;
+    protected int $enable_charge_of_swaps = 0;
+    protected int $margin_type = 0;
 
     /**
      * @return string

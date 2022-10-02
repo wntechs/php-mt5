@@ -6,8 +6,8 @@ use Ram\WIK\Response\BaseResponse;
 
 class GetTradingVolumeResponse extends BaseResponse
 {
-    protected int $users;
-    protected string $failed_logins;
+    protected int $users = 0;
+    protected string $failed_logins = '';
 
     /**
      * @var \Ram\WIK\Response\GetTradingVolume\TradingVolumeScsvLine[]
@@ -67,7 +67,7 @@ class GetTradingVolumeResponse extends BaseResponse
         $lines = explode(PHP_EOL, $answer);
         foreach ($lines as $line) {
             if(strlen($line) > 0)
-                $this->answer[] = new GetTradingVolumeResponse($line);
+                $this->answer[] = new TradingVolumeScsvLine($line);
         }
         return $this;
     }

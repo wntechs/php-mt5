@@ -11,7 +11,7 @@ class GetLeverageAndGroupResponse extends BaseResponse
     /**
      * @var \Ram\WIK\Response\GetLeverageAndGroup\LeverageAndGroupScsvLine[]
      */
-    protected array $answer;
+    protected array $answer = [];
 
 
     /**

@@ -4,7 +4,7 @@ namespace Ram\WIK\Response;
 
 class CreateAccountResponse extends BaseResponse
 {
-    protected string $login;
+    protected string $login = '';
 
 
 

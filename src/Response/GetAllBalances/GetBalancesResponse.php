@@ -9,7 +9,7 @@ class GetBalancesResponse extends BaseResponse
     /**
      * @var \Ram\WIK\Response\GetAllBalances\GetBalanceScsvLine[]
      */
-    protected array $answer;
+    protected array $answer = [];
 
     /**
      * @return array
@@ -28,7 +28,7 @@ class GetBalancesResponse extends BaseResponse
         $lines = explode(PHP_EOL, $answer);
         foreach ($lines as $line) {
             if(strlen($line) > 0)
-                $this->answer[] = new GetBalancesResponse($line);
+                $this->answer[] = new GetBalanceScsvLine($line);
         }
         return $this;
     }

@@ -10,7 +10,7 @@ class TransferBalanceResponse extends BaseResponse
     /**
      * @var \Ram\WIK\Response\TransferBalance\BalanceScsvLine[]
      */
-    protected array $answer;
+    protected array $answer = [];
 
     /**
      * @return array
@@ -29,7 +29,7 @@ class TransferBalanceResponse extends BaseResponse
         $lines = explode(PHP_EOL, $answer);
         foreach ($lines as $line) {
             if(strlen($line) > 0)
-                $this->answer[] = new TransferBalanceResponse($line);
+                $this->answer[] = new BalanceScsvLine($line);
         }
         return $this;
     }

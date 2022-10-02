@@ -4,8 +4,8 @@ namespace Ram\WIK\Response;
 
 class AccountHaveOrdersResponse extends BaseResponse
 {
-    protected int $orders;
-    protected int $login;
+    protected int $orders = 0;
+    protected int $login = 0;
 
     /**
      * @return int

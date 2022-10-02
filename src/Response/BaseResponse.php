@@ -7,9 +7,9 @@ use Ram\WIK\Arrayable;
 class BaseResponse extends Arrayable
 {
     use ResponseParser;
-    protected string $request_id;
-    protected int $size;
-    protected int $result;
+    protected string $request_id = '';
+    protected int $size = 0;
+    protected int $result = 0;
     protected string $error = "";
 
     public function __construct( string $response)

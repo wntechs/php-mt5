@@ -6,12 +6,12 @@ use Ram\WIK\Response\BaseResponse;
 
 class GetDealsHistoryResponse extends BaseResponse
 {
-    protected int $items;
-    protected string $failed_logins;
+    protected int $items = 0;
+    protected string $failed_logins = '';
     /**
      * @var \Ram\WIK\Response\GetDealsHistory\DealHistoryScsvLine[]
      */
-    protected array $answer;
+    protected array $answer = [];
 
     /**
      * @return int

@@ -9,7 +9,7 @@ class BulkChangeBalanceResponse extends BaseResponse
     /**
      * @var \Ram\WIK\Response\BulkChangeBalance\ChangeBalanceScsvLine[]
      */
-    protected array $answer;
+    protected array $answer =[];
 
     /**
      * @return array

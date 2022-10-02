@@ -4,37 +4,37 @@ namespace Ram\WIK\Response;
 
 class GetAccountInfoExResponse extends BaseResponse
 {
-    protected string $login;
-    protected string $name;
-    protected string $email;
-    protected string $group;
-    protected int $leverage;
-    protected string $regdate;
-    protected string $country;
-    protected string $state;
-    protected string $address;
-    protected string $phone;
-    protected string $city;
-    protected string $zip;
-    protected string $enable;
-    protected int $enable_trading;
-    protected float $balance;
-    protected string $comment;
-    protected string $enable_change_password;
-    protected float $free_margin;
-    protected string $opened_positions;
-    protected string $agent_account;
-    protected string $id;
-    protected string $status;
-    protected float $annual_interest_rate;
-    protected string $send_reports;
-    protected float $previous_month_balance;
-    protected float $previous_day_balance;
-    protected float $credit;
-    protected float $equity;
-    protected float $margin;
-    protected float $margin_level;
-    protected string $lastdate;
+    protected string $login ='';
+    protected string $name ='';
+    protected string $email ='';
+    protected string $group ='';
+    protected int $leverage = 0;
+    protected string $regdate ='';
+    protected string $country ='';
+    protected string $state ='';
+    protected string $address ='';
+    protected string $phone ='';
+    protected string $city ='';
+    protected string $zip ='';
+    protected string $enable ='';
+    protected int $enable_trading = 0;
+    protected float $balance = 0;
+    protected string $comment ='';
+    protected string $enable_change_password ='';
+    protected float $free_margin = 0;
+    protected string $opened_positions ='';
+    protected string $agent_account ='';
+    protected string $id ='';
+    protected string $status ='';
+    protected float $annual_interest_rate = 0;
+    protected string $send_reports ='';
+    protected float $previous_month_balance = 0;
+    protected float $previous_day_balance = 0;
+    protected float $credit = 0;
+    protected float $equity = 0;
+    protected float $margin = 0;
+    protected float $margin_level = 0;
+    protected string $lastdate ='';
 
     /**
      * @return string
