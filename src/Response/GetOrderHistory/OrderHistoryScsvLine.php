@@ -9,6 +9,9 @@ class OrderHistoryScsvLine extends Arrayable
 {
     use ScsvParser;
 
+    /**
+    (Double)price_sl;(Double)price_tp;(Double)price_trigger;(UInt32)state;(Decimal)volume_initial;(Decimal)volume_current;(Int64)time_setup;(Int64)time_done;(Int64)time_expiration;(UInt32)type;(Double)contract_size;(UInt32)digits;(String)external_id;(UInt64)position_id;(UInt32)type_fill;(UInt32)type_time;(Double)margin_rate;(String)comment;(UInt32)activation_mode
+     */
     private array $keys = ['login', 'order', 'symbol', 'activation_price', 'price_current', 'price_order', 'open_price',
         'price_sl', 'price_tp', 'price_trigger', 'state', 'volume_initial', 'volume_current', 'time_setup', 'time_done',
         'time_expiration', 'type', 'contract_size', 'digits', 'external_id', 'position_id', 'type_fill', 'type_time',
@@ -23,7 +26,7 @@ class OrderHistoryScsvLine extends Arrayable
     protected float $price_sl;
     protected float $price_tp;
     protected float $price_trigger;
-    protected int $state;
+    protected float $state;
     protected string $volume_initial;
     protected string $volume_current;
     protected string $time_setup;
@@ -226,9 +229,9 @@ class OrderHistoryScsvLine extends Arrayable
     }
 
     /**
-     * @return int
+     * @return float
      */
-    public function getState(): int
+    public function getState(): float
     {
         return $this->state;
     }
@@ -237,7 +240,7 @@ class OrderHistoryScsvLine extends Arrayable
      * @param int $state
      * @return OrderHistoryScsvLine
      */
-    public function setState(int $state): OrderHistoryScsvLine
+    public function setState(float $state): OrderHistoryScsvLine
     {
         $this->state = $state;
         return $this;
