@@ -12,9 +12,11 @@ trait ScsvParser
         $reflector = new ReflectionClass($this);
         $row = str_getcsv($line, ';');
         foreach ($row as $index => $column){
-            $method = "set" . ucfirst($this->keys[$index]);
-            if($column != null && $reflector->hasMethod($method)){
-                $this->{$method}($column);
+            if($this->keys[$index] != null) {
+                $method = "set" . ucfirst($this->keys[$index]);
+                if ($column != null && $reflector->hasMethod($method)) {
+                    $this->{$method}($column);
+                }
             }
         }
     }
