@@ -13,7 +13,8 @@ trait ScsvParser
         $row = str_getcsv($line, ';');
         foreach ($row as $index => $column){
             if(isset($this->keys[$index])) {
-                $method = "set" . ucfirst($this->keys[$index]);
+                $formattedKey = str_replace('_','',ucfirst($this->keys[$index]));
+                $method = "set" . $formattedKey;
                 if ($column != null && $reflector->hasMethod($method)) {
                     $this->{$method}($column);
                 }
