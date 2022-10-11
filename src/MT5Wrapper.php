@@ -32,6 +32,7 @@ use Ram\WIK\Request\GetMarginInfoRequest;
 use Ram\WIK\Request\GetOpenPositionsForLoginRequest;
 use Ram\WIK\Request\GetOpenPositionsRequest;
 use Ram\WIK\Request\GetOrderHistoryRequest;
+use Ram\WIK\Request\GetSymbolRequest;
 use Ram\WIK\Request\GetTradingVolumeRequest;
 use Ram\WIK\Request\GetUsersOnlineRequest;
 use Ram\WIK\Request\GetVersionRequest;
@@ -136,10 +137,9 @@ class MT5Wrapper
         return $this->sendRequest($data);
     }
 
-    public function getSymbols(BaseRequest $request): Response\GetSymbols\GetSymbolsResponse|bool
+    public function getSymbols(GetSymbolRequest $request): Response\GetSymbols\GetSymbolsResponse|bool
     {
         $data = $request->toArray();
-        $data['action'] = 'getsymbols';
         $this->connect();
         $ret = $this->sendRequest($data);
         if($ret){
