@@ -2,3 +2,5 @@
 /composer.lock
 .idea/*.*
 /src/test.php
+/src/mt5Client.log
+/src/test2.php
