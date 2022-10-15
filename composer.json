@@ -15,7 +15,7 @@
         "guzzlehttp/guzzle": "^7.5",
         "netresearch/jsonmapper": "^4.0",
         "gmponos/guzzle_logger": "^2.2",
-        "monolog/monolog": "^3.2",
+        "monolog/monolog": "^2.8.0",
         "phpfastcache/phpfastcache": "^9.1"
     },
     "autoload": {

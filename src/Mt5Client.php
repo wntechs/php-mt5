@@ -49,7 +49,7 @@ class Mt5Client
         $this->host = $host;
         $this->port = $port;
         $logger = new Logger('mt5Client');  //A new PSR-3 Logger like Monolog
-        $logger->pushHandler(new StreamHandler(__DIR__ . '/mt5Client.log', Level::Debug));
+        $logger->pushHandler(new StreamHandler(__DIR__ . '/mt5Client.log', Logger::DEBUG));
         $stack = new HandlerStack();
         $stack->setHandler(new CurlHandler());
         $stack->push($this->handleAuthorizationHeader());
