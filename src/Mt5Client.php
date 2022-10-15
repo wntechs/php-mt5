@@ -11,6 +11,7 @@ use Monolog\Handler\StreamHandler;
 use Monolog\Level;
 use Monolog\Logger;
 use Psr\Http\Message\RequestInterface;
+use Ram\WIK\Mt5Request\ChangeCreditRequest;
 use Ram\WIK\Mt5Request\ChangePasswordRequest;
 use Ram\WIK\Mt5Request\CreateAccountRequest;
 use Ram\WIK\Mt5Request\DealHistoryRequest;
@@ -18,6 +19,7 @@ use Ram\WIK\Mt5Request\OrderHistoryRequest;
 use Ram\WIK\Mt5Response\AccountInfo\AccountInfoData;
 use Ram\WIK\Mt5Response\Accounts\AccountList;
 use Ram\WIK\Mt5Response\Balances\BalanceList;
+use Ram\WIK\Mt5Response\ChangeCredit\ChangeCredit;
 use Ram\WIK\Mt5Response\ChangePassword\ChangePassword;
 use Ram\WIK\Mt5Response\CreateAccount\CreateAccount;
 use Ram\WIK\Mt5Response\Groups\GroupList;
@@ -171,5 +173,12 @@ class Mt5Client
         return $this->mapper->map(json_decode($body), new OrderHistory());
     }
 
+    public function changeCredit(ChangeCreditRequest $request){
+        $resp = $this->client->post("user/{$request->getLogin()}/change-credit", ['json' => $request->toArray()]);
+
+        $body = $resp->getBody()->getContents();
+
+        return $this->mapper->map(json_decode($body), new ChangeCredit());
+    }
 
 }
