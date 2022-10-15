@@ -10,6 +10,7 @@ use JsonMapper;
 use Monolog\Handler\StreamHandler;
 use Monolog\Level;
 use Monolog\Logger;
+use Phpfastcache\Helper\Psr16Adapter;
 use Psr\Http\Message\RequestInterface;
 use Ram\WIK\Mt5Request\ChangeCreditRequest;
 use Ram\WIK\Mt5Request\ChangePasswordRequest;
@@ -27,16 +28,24 @@ use Ram\WIK\Mt5Response\OrderHistory\OrderHistory;
 
 class Mt5Client
 {
+    private static string $AUTH_TOKEN = "AUTH_TOKEN";
     protected $client;
     protected $host;
     protected $port;
     protected $token;
     protected $mapper;
+    private $cacheAdapter;
+    protected $user;
+    protected $password;
 
-    public function __construct($host, $port){
+    public function __construct($user, $password, $host, $port){
 
+        $this->cacheAdapter = new Psr16Adapter("Files");
+        $this->token = rtrim(ltrim($this->cacheAdapter->get(self::$AUTH_TOKEN), '"'), '"');
         $this->mapper = new JsonMapper();
         $this->mapper->bStrictNullTypes = false;
+        $this->user = $user;
+        $this->password = $password;
         $this->host = $host;
         $this->port = $port;
         $logger = new Logger('mt5Client');  //A new PSR-3 Logger like Monolog
@@ -54,24 +63,34 @@ class Mt5Client
             'headers' => [
                 'Accept'     => '*/*',
                 'content-type'     => 'application/json',
-               // 'Authorization'     => 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImp0aSI6IjhmYzA3ZDM1LWEwZGUtNDYxNS1hM2RhLThiNGYwZjQxN2E0ZSIsImlhdCI6IjEwLzEyLzIwMjIgMzoxNDozMiBQTSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhZG1pbiIsIlVzZXJJZCI6IjEiLCJleHAiOjE2NjU2NzQwNzIsImlzcyI6Imh0dHBzOi8va2FybXNvZnQuY29tIiwiYXVkIjoiaHR0cHM6Ly9rYXJtc29mdC5jb20ifQ._abMXviGUdY2GkxyceCvdcdChhEQdWTDrvjbUOK93XE',
                 'Accept-Encoding'     => 'gzip, deflate, br',
                 'Connection'     => 'keep-alive',
                 'User-Agent'     => 'PostmanRuntime/7.26.8',
                 ]
         ]);
+        if(!$this->hasValidToken())
+            $this->generateToken();
     }
 
-    public  function generateToken($username, $password){
-        try {
+    /**
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public  function generateToken(): string
+    {
+        //echo 'requesting new token'. PHP_EOL;
+        $resp = $this->client->post("token", ['query' => ['username' => $this->user, 'password' => $this->password]]);
+        $this->token = $resp->getBody()->getContents();
+       // echo 'token generated' . PHP_EOL;
+        $this->cacheAdapter->set(self::$AUTH_TOKEN, $this->token, 60*60*12); // 12 hours
+        //echo 'Token saved in cache' . PHP_EOL;die;
+        return $this->token;
+    }
 
-            $resp = $this->client->post("token", ['query' => ['username' => $username, 'password' => $password]]);
-            $this->token = $resp->getBody()->getContents();
-            return $this->token;
+    private function hasValidToken(){
+        if($this->token == null) return false;
+        $result = json_decode(base64_decode(str_replace('_', '/', str_replace('-','+',explode('.', $this->token)[1]))));
 
-        }catch (\Exception $e){
-            return 'err:' . $e->getMessage();
-        }
+        return ($result->exp > time());
     }
 
     /**
@@ -101,6 +120,7 @@ class Mt5Client
         {
             return function (RequestInterface $request, array $options) use ($handler)
             {
+
                 if($this->token) {
                     $request = $request->withHeader('Authorization', 'Bearer ' . $this->token);
                 }
@@ -174,8 +194,8 @@ class Mt5Client
     }
 
     public function changeCredit(ChangeCreditRequest $request){
-        $resp = $this->client->post("user/{$request->getLogin()}/change-credit", ['json' => $request->toArray()]);
 
+        $resp = $this->client->post("user/{$request->getLogin()}/change-credit", ['json' => $request->toArray()]);
         $body = $resp->getBody()->getContents();
 
         return $this->mapper->map(json_decode($body), new ChangeCredit());
