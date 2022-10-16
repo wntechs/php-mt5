@@ -12,7 +12,7 @@ class Deal extends Arrayable
     protected string $symbol;
     protected float $price;
     protected float $profit;
-    protected float $commission;
+    protected float $commision;
     protected string $dealer;
     protected int $entry;
     protected string $volume;
@@ -151,18 +151,18 @@ class Deal extends Arrayable
     /**
      * @return float
      */
-    public function getCommission(): float
+    public function getCommision(): float
     {
-        return $this->commission;
+        return $this->commision;
     }
 
     /**
-     * @param float $commission
+     * @param float $commision
      * @return Deal
      */
-    public function setCommission(float $commission): Deal
+    public function setCommision(float $commision): Deal
     {
-        $this->commission = $commission;
+        $this->commision = $commision;
         return $this;
     }
 
