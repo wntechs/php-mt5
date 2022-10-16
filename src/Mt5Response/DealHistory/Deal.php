@@ -36,7 +36,7 @@ class Deal extends Arrayable
     protected float $swaps;
     protected string $comment;
     protected float $tick_size;
-    protected float $tick_vlue;
+    protected float $tick_value;
     protected int $volume_ext;
     protected float $price_position;
 
@@ -533,18 +533,18 @@ class Deal extends Arrayable
     /**
      * @return float
      */
-    public function getTickVlue(): float
+    public function getTickValue(): float
     {
-        return $this->tick_vlue;
+        return $this->tick_value;
     }
 
     /**
-     * @param float $tick_vlue
+     * @param float $tick_value
      * @return Deal
      */
-    public function setTickVlue(float $tick_vlue): Deal
+    public function setTickValue(float $tick_value): Deal
     {
-        $this->tick_vlue = $tick_vlue;
+        $this->tick_value = $tick_value;
         return $this;
     }
 
