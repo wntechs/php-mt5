@@ -23,6 +23,7 @@ use Ram\WIK\Mt5Response\Balances\BalanceList;
 use Ram\WIK\Mt5Response\ChangeCredit\ChangeCredit;
 use Ram\WIK\Mt5Response\ChangePassword\ChangePassword;
 use Ram\WIK\Mt5Response\CreateAccount\CreateAccount;
+use Ram\WIK\Mt5Response\DealHistory\DealHistory;
 use Ram\WIK\Mt5Response\Groups\GroupList;
 use Ram\WIK\Mt5Response\OrderHistory\OrderHistory;
 
@@ -160,7 +161,7 @@ class Mt5Client
         return $this->mapper->map(json_decode($body), new BalanceList());
     }
 
-    public function createAccount(CreateAccountRequest $request){
+    public function createAccount(CreateAccountRequest $request):CreateAccount{
         //print_r($request->toJson()); die;
         $resp = $this->client->post("account", ['json' => $request->toArray()]);
 
@@ -169,7 +170,7 @@ class Mt5Client
         return $this->mapper->map(json_decode($body), new CreateAccount());
     }
 
-    public function changePassword(ChangePasswordRequest $request){
+    public function changePassword(ChangePasswordRequest $request):ChangePassword{
         $resp = $this->client->post("user/{$request->getLogin()}/change-password", ['json' => $request->toArray()]);
 
         $body = $resp->getBody()->getContents();
@@ -177,15 +178,15 @@ class Mt5Client
         return $this->mapper->map(json_decode($body), new ChangePassword());
     }
 
-    public function getDealHistory(DealHistoryRequest $request){
+    public function getDealHistory(DealHistoryRequest $request):DealHistory{
         $resp = $this->client->post("trade/dealhistory", ['json' => $request->toArray()]);
 
         $body = $resp->getBody()->getContents();
 
-        return $this->mapper->map(json_decode($body), new Mt5Response\DealHistory\DealHistory());
+        return $this->mapper->map(json_decode($body), new DealHistory());
     }
 
-    public function getOrderHistory(OrderHistoryRequest $request){
+    public function getOrderHistory(OrderHistoryRequest $request): OrderHistory{
         $resp = $this->client->post("trade/ordershistory", ['json' => $request->toArray()]);
 
         $body = $resp->getBody()->getContents();
@@ -193,7 +194,7 @@ class Mt5Client
         return $this->mapper->map(json_decode($body), new OrderHistory());
     }
 
-    public function changeCredit(ChangeCreditRequest $request){
+    public function changeCredit(ChangeCreditRequest $request):ChangeCredit{
 
         $resp = $this->client->post("user/{$request->getLogin()}/change-credit", ['json' => $request->toArray()]);
         $body = $resp->getBody()->getContents();
