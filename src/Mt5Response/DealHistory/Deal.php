@@ -16,6 +16,7 @@ class Deal extends Arrayable
     protected string $dealer;
     protected int $entry;
     protected string $volume;
+    protected int $action;
     protected int $create_time;
     /**
      * @var int|null
@@ -581,6 +582,24 @@ class Deal extends Arrayable
     public function setPricePosition(float $price_position): Deal
     {
         $this->price_position = $price_position;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAction(): int
+    {
+        return $this->action;
+    }
+
+    /**
+     * @param int $action
+     * @return Deal
+     */
+    public function setAction(int $action): Deal
+    {
+        $this->action = $action;
         return $this;
     }
 
