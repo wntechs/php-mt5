@@ -8,7 +8,7 @@ use GuzzleHttp\HandlerStack;
 use GuzzleLogMiddleware\LogMiddleware;
 use JsonMapper;
 use Monolog\Handler\StreamHandler;
-use Monolog\Level;
+
 use Monolog\Logger;
 use Phpfastcache\Helper\Psr16Adapter;
 use Psr\Http\Message\RequestInterface;
@@ -42,7 +42,11 @@ class Mt5Client
     public function __construct($user, $password, $host, $port){
 
         $this->cacheAdapter = new Psr16Adapter("Files");
-        $this->token = rtrim(ltrim($this->cacheAdapter->get(self::$AUTH_TOKEN), '"'), '"');
+        if($this->cacheAdapter->has(self::$AUTH_TOKEN)) {
+            $this->token = rtrim(ltrim($this->cacheAdapter->get(self::$AUTH_TOKEN), '"'), '"');
+        }else{
+            $this->generateToken();
+        }
         $this->mapper = new JsonMapper();
         $this->mapper->bStrictNullTypes = false;
         $this->user = $user;
