@@ -42,17 +42,20 @@ class Mt5Client
     public function __construct($user, $password, $host, $port){
 
         $this->cacheAdapter = new Psr16Adapter("Files");
-        if($this->cacheAdapter->has(self::$AUTH_TOKEN)) {
-            $this->token = rtrim(ltrim($this->cacheAdapter->get(self::$AUTH_TOKEN), '"'), '"');
-        }else{
-            $this->generateToken();
-        }
+
         $this->mapper = new JsonMapper();
         $this->mapper->bStrictNullTypes = false;
         $this->user = $user;
         $this->password = $password;
         $this->host = $host;
         $this->port = $port;
+
+        if($this->cacheAdapter->has(self::$AUTH_TOKEN)) {
+            $this->token = rtrim(ltrim($this->cacheAdapter->get(self::$AUTH_TOKEN), '"'), '"');
+        }else{
+            $this->generateToken();
+        }
+
         $logger = new Logger('mt5Client');  //A new PSR-3 Logger like Monolog
         $logger->pushHandler(new StreamHandler(__DIR__ . '/mt5Client.log', Logger::DEBUG));
         $stack = new HandlerStack();
