@@ -82,8 +82,21 @@ class Mt5Client
      */
     public  function generateToken(): string
     {
+        $client = new Client([
+            // Base URI is used with relative requests
+            'base_uri' => "http://{$this->host}:{$this->port}/api/",
+            // You can set any number of default request options.
+            'timeout'  => 600.0,
+            'headers' => [
+                'Accept'     => '*/*',
+                'content-type'     => 'application/json',
+                'Accept-Encoding'     => 'gzip, deflate, br',
+                'Connection'     => 'keep-alive',
+                'User-Agent'     => 'PostmanRuntime/7.26.8',
+            ]
+        ]);
         //echo 'requesting new token'. PHP_EOL;
-        $resp = $this->client->post("token", ['query' => ['username' => $this->user, 'password' => $this->password]]);
+        $resp = $client->post("token", ['query' => ['username' => $this->user, 'password' => $this->password]]);
         $this->token = $resp->getBody()->getContents();
        // echo 'token generated' . PHP_EOL;
         $this->cacheAdapter->set(self::$AUTH_TOKEN, $this->token, 60*60*12); // 12 hours
