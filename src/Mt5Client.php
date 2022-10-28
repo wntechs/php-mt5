@@ -16,6 +16,7 @@ use Ram\WIK\Mt5Request\ChangeCreditRequest;
 use Ram\WIK\Mt5Request\ChangePasswordRequest;
 use Ram\WIK\Mt5Request\CreateAccountRequest;
 use Ram\WIK\Mt5Request\DealHistoryRequest;
+use Ram\WIK\Mt5Request\OpenPositionRequest;
 use Ram\WIK\Mt5Request\OrderHistoryRequest;
 use Ram\WIK\Mt5Response\AccountInfo\AccountInfoData;
 use Ram\WIK\Mt5Response\Accounts\AccountList;
@@ -26,6 +27,7 @@ use Ram\WIK\Mt5Response\CreateAccount\CreateAccount;
 use Ram\WIK\Mt5Response\DealHistory\DealHistory;
 use Ram\WIK\Mt5Response\Groups\GroupList;
 use Ram\WIK\Mt5Response\OrderHistory\OrderHistory;
+use Ram\WIK\Mt5Response\Positions\Positions;
 
 class Mt5Client
 {
@@ -220,6 +222,13 @@ class Mt5Client
         $body = $resp->getBody()->getContents();
 
         return $this->mapper->map($this->checkResponseAndThrowErrorIfAny($body), new ChangeCredit());
+    }
+
+    public function getOpenPositions(OpenPositionRequest $request): Positions {
+        $resp = $this->client->post("trade/openpositions", ['json' => $request->toArray()]);
+        $body = $resp->getBody()->getContents();
+
+        return $this->mapper->map($this->checkResponseAndThrowErrorIfAny($body), new Positions());
     }
 
     private function checkResponseAndThrowErrorIfAny($body){
