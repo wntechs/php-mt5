@@ -157,28 +157,28 @@ class Mt5Client
         $resp = $this->client->get("group", ['json' => ['request_id' => 123456]]);
         $body = $resp->getBody()->getContents();
 
-        return $this->mapper->map(json_decode($body), new GroupList());
+        return $this->mapper->map($this->checkResponseAndThrowErrorIfAny($body), new GroupList());
     }
 
     public function getAccounts(string $group):AccountList{
         $resp = $this->client->get("group/accounts", ['json' => ['request_id' => 123456, 'group' => $group]]);
         $body = $resp->getBody()->getContents();
 
-        return $this->mapper->map(json_decode($body), new AccountList());
+        return $this->mapper->map($this->checkResponseAndThrowErrorIfAny($body), new AccountList());
     }
 
     public function getAccountInfo(string $login):AccountInfoData{
         $resp = $this->client->get("account/{$login}", ['json' => ['request_id' => 123456]]);
         $body = $resp->getBody()->getContents();
 
-        return $this->mapper->map(json_decode($body), new AccountInfoData());
+        return $this->mapper->map($this->checkResponseAndThrowErrorIfAny($body), new AccountInfoData());
     }
 
     public function getBalances(array $logins):BalanceList{
         $resp = $this->client->post("account/balances", ['json' => ['request_id' => 123456, 'logins'=> $logins]]);
         $body = $resp->getBody()->getContents();
 
-        return $this->mapper->map(json_decode($body), new BalanceList());
+        return $this->mapper->map($this->checkResponseAndThrowErrorIfAny($body), new BalanceList());
     }
 
     public function createAccount(CreateAccountRequest $request):CreateAccount{
@@ -187,7 +187,7 @@ class Mt5Client
 
         $body = $resp->getBody()->getContents();
 
-        return $this->mapper->map(json_decode($body), new CreateAccount());
+        return $this->mapper->map($this->checkResponseAndThrowErrorIfAny($body), new CreateAccount());
     }
 
     public function changePassword(ChangePasswordRequest $request):ChangePassword{
@@ -195,7 +195,7 @@ class Mt5Client
 
         $body = $resp->getBody()->getContents();
 
-        return $this->mapper->map(json_decode($body), new ChangePassword());
+        return $this->mapper->map($this->checkResponseAndThrowErrorIfAny($body), new ChangePassword());
     }
 
     public function getDealHistory(DealHistoryRequest $request):DealHistory{
@@ -203,7 +203,7 @@ class Mt5Client
 
         $body = $resp->getBody()->getContents();
 
-        return $this->mapper->map(json_decode($body), new DealHistory());
+        return $this->mapper->map($this->checkResponseAndThrowErrorIfAny($body), new DealHistory());
     }
 
     public function getOrderHistory(OrderHistoryRequest $request): OrderHistory{
@@ -211,7 +211,7 @@ class Mt5Client
 
         $body = $resp->getBody()->getContents();
 
-        return $this->mapper->map(json_decode($body), new OrderHistory());
+        return $this->mapper->map($this->checkResponseAndThrowErrorIfAny($body), new OrderHistory());
     }
 
     public function changeCredit(ChangeCreditRequest $request):ChangeCredit{
@@ -219,7 +219,14 @@ class Mt5Client
         $resp = $this->client->post("user/{$request->getLogin()}/change-credit", ['json' => $request->toArray()]);
         $body = $resp->getBody()->getContents();
 
-        return $this->mapper->map(json_decode($body), new ChangeCredit());
+        return $this->mapper->map($this->checkResponseAndThrowErrorIfAny($body), new ChangeCredit());
+    }
+
+    private function checkResponseAndThrowErrorIfAny($body){
+        $obj = json_decode($body);
+        if($obj->StatusCode != 200)
+            throw new \Exception($obj->Message);
+        return $obj;
     }
 
 }
