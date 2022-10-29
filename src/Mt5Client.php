@@ -233,6 +233,7 @@ class Mt5Client
 
     private function checkResponseAndThrowErrorIfAny($body){
         $obj = json_decode($body);
+       // print_r($obj);die;
         if($obj->StatusCode != 200)
             throw new \Exception($obj->Message);
         return $obj;
