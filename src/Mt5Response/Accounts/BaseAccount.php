@@ -12,18 +12,19 @@ abstract class BaseAccount extends Arrayable
     protected string $email;
     protected string $group;
     protected int $leverage;
-   // protected int $registration;
+    protected int $regdate;
     protected string $country;
     protected string $state;
+    protected string $address;
+    protected string $phone;
     protected string $city;
     protected string $zipcode;
-    protected int $enable;
-    protected int $enable_trading;
     protected float $balance;
     protected string $comment;
-    protected int $enable_change_password;
+    protected float $free_margin;
+    protected int $opened_positions;
     protected int $agent_account;
-    //protected int $last_access;
+    protected int $lastdate;
     protected string $id;
 
     /**
@@ -117,6 +118,24 @@ abstract class BaseAccount extends Arrayable
     }
 
     /**
+     * @return int
+     */
+    public function getRegdate(): int
+    {
+        return $this->regdate;
+    }
+
+    /**
+     * @param int $regdate
+     * @return BaseAccount
+     */
+    public function setRegdate(int $regdate): BaseAccount
+    {
+        $this->regdate = $regdate;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getCountry(): string
@@ -149,6 +168,42 @@ abstract class BaseAccount extends Arrayable
     public function setState(string $state): BaseAccount
     {
         $this->state = $state;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddress(): string
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param string $address
+     * @return BaseAccount
+     */
+    public function setAddress(string $address): BaseAccount
+    {
+        $this->address = $address;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhone(): string
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param string $phone
+     * @return BaseAccount
+     */
+    public function setPhone(string $phone): BaseAccount
+    {
+        $this->phone = $phone;
         return $this;
     }
 
@@ -189,42 +244,6 @@ abstract class BaseAccount extends Arrayable
     }
 
     /**
-     * @return int
-     */
-    public function getEnable(): int
-    {
-        return $this->enable;
-    }
-
-    /**
-     * @param int $enable
-     * @return BaseAccount
-     */
-    public function setEnable(int $enable): BaseAccount
-    {
-        $this->enable = $enable;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getEnableTrading(): int
-    {
-        return $this->enable_trading;
-    }
-
-    /**
-     * @param int $enable_trading
-     * @return BaseAccount
-     */
-    public function setEnableTrading(int $enable_trading): BaseAccount
-    {
-        $this->enable_trading = $enable_trading;
-        return $this;
-    }
-
-    /**
      * @return float
      */
     public function getBalance(): float
@@ -261,20 +280,38 @@ abstract class BaseAccount extends Arrayable
     }
 
     /**
-     * @return int
+     * @return float
      */
-    public function getEnableChangePassword(): int
+    public function getFreeMargin(): float
     {
-        return $this->enable_change_password;
+        return $this->free_margin;
     }
 
     /**
-     * @param int $enable_change_password
+     * @param float $free_margin
      * @return BaseAccount
      */
-    public function setEnableChangePassword(int $enable_change_password): BaseAccount
+    public function setFreeMargin(float $free_margin): BaseAccount
     {
-        $this->enable_change_password = $enable_change_password;
+        $this->free_margin = $free_margin;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOpenedPositions(): int
+    {
+        return $this->opened_positions;
+    }
+
+    /**
+     * @param int $opened_positions
+     * @return BaseAccount
+     */
+    public function setOpenedPositions(int $opened_positions): BaseAccount
+    {
+        $this->opened_positions = $opened_positions;
         return $this;
     }
 
@@ -297,6 +334,24 @@ abstract class BaseAccount extends Arrayable
     }
 
     /**
+     * @return int
+     */
+    public function getLastdate(): int
+    {
+        return $this->lastdate;
+    }
+
+    /**
+     * @param int $lastdate
+     * @return BaseAccount
+     */
+    public function setLastdate(int $lastdate): BaseAccount
+    {
+        $this->lastdate = $lastdate;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getId(): string
@@ -313,6 +368,5 @@ abstract class BaseAccount extends Arrayable
         $this->id = $id;
         return $this;
     }
-
 
 }

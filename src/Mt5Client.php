@@ -12,6 +12,8 @@ use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Phpfastcache\Helper\Psr16Adapter;
 use Psr\Http\Message\RequestInterface;
+use Ram\WIK\Mt5Request\AccountInfoExRequest;
+use Ram\WIK\Mt5Request\AccountInfoRequest;
 use Ram\WIK\Mt5Request\ChangeCreditRequest;
 use Ram\WIK\Mt5Request\ChangePasswordRequest;
 use Ram\WIK\Mt5Request\CreateAccountRequest;
@@ -19,6 +21,7 @@ use Ram\WIK\Mt5Request\DealHistoryRequest;
 use Ram\WIK\Mt5Request\OpenPositionRequest;
 use Ram\WIK\Mt5Request\OrderHistoryRequest;
 use Ram\WIK\Mt5Response\AccountInfo\AccountInfoData;
+use Ram\WIK\Mt5Response\AccountInfoEx\AccountInfoExData;
 use Ram\WIK\Mt5Response\Accounts\AccountList;
 use Ram\WIK\Mt5Response\Balances\BalanceList;
 use Ram\WIK\Mt5Response\ChangeCredit\ChangeCredit;
@@ -28,6 +31,7 @@ use Ram\WIK\Mt5Response\DealHistory\DealHistory;
 use Ram\WIK\Mt5Response\Groups\GroupList;
 use Ram\WIK\Mt5Response\OrderHistory\OrderHistory;
 use Ram\WIK\Mt5Response\Positions\Positions;
+
 
 class Mt5Client
 {
@@ -169,11 +173,17 @@ class Mt5Client
         return $this->mapper->map($this->checkResponseAndThrowErrorIfAny($body), new AccountList());
     }
 
-    public function getAccountInfo(string $login):AccountInfoData{
-        $resp = $this->client->get("account/{$login}", ['json' => ['request_id' => 123456]]);
+    public function getAccountInfo(AccountInfoRequest $request):AccountInfoData{
+        $resp = $this->client->get("account/{$request->getLogin()}", ['json' => ['request_id' => 123456]]);
         $body = $resp->getBody()->getContents();
 
         return $this->mapper->map($this->checkResponseAndThrowErrorIfAny($body), new AccountInfoData());
+    }
+    public function getAccountInfoEx(AccountInfoExRequest $request):AccountInfoExData{
+        $resp = $this->client->get("account/{$request->getLogin()}/infoEx", ['json' => ['request_id' => 123456]]);
+        $body = $resp->getBody()->getContents();
+
+        return $this->mapper->map($this->checkResponseAndThrowErrorIfAny($body), new AccountInfoExData());
     }
 
     public function getBalances(array $logins):BalanceList{
@@ -230,6 +240,8 @@ class Mt5Client
 
         return $this->mapper->map($this->checkResponseAndThrowErrorIfAny($body), new Positions());
     }
+
+
 
     private function checkResponseAndThrowErrorIfAny($body){
         $obj = json_decode($body);
