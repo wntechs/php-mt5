@@ -4,7 +4,7 @@ namespace Ram\WIK\Mt5Response\Balances;
 
 use Ram\WIK\Mt5Response\BaseResponse;
 
-class BalanceList extends BaseResponse
+class BalanceResponse extends BaseResponse
 {
     protected BalanceData $Data;
 
@@ -18,9 +18,9 @@ class BalanceList extends BaseResponse
 
     /**
      * @param \Ram\WIK\Mt5Response\Balances\BalanceData $Data
-     * @return BalanceList
+     * @return BalanceResponse
      */
-    public function setData(BalanceData $Data): BalanceList
+    public function setData(BalanceData $Data): BalanceResponse
     {
         $this->Data = $Data;
         return $this;

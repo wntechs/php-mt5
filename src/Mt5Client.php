@@ -12,6 +12,7 @@ use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Phpfastcache\Helper\Psr16Adapter;
 use Psr\Http\Message\RequestInterface;
+use Ram\WIK\Mt5Request\AccountBalanceRequest;
 use Ram\WIK\Mt5Request\AccountInfoExRequest;
 use Ram\WIK\Mt5Request\AccountInfoRequest;
 use Ram\WIK\Mt5Request\ChangeCreditRequest;
@@ -23,7 +24,7 @@ use Ram\WIK\Mt5Request\OrderHistoryRequest;
 use Ram\WIK\Mt5Response\AccountInfo\AccountInfoData;
 use Ram\WIK\Mt5Response\AccountInfoEx\AccountInfoExData;
 use Ram\WIK\Mt5Response\Accounts\AccountList;
-use Ram\WIK\Mt5Response\Balances\BalanceList;
+use Ram\WIK\Mt5Response\Balances\BalanceResponse;
 use Ram\WIK\Mt5Response\ChangeCredit\ChangeCredit;
 use Ram\WIK\Mt5Response\ChangePassword\ChangePassword;
 use Ram\WIK\Mt5Response\CreateAccount\CreateAccount;
@@ -166,6 +167,13 @@ class Mt5Client
         return $this->mapper->map($this->checkResponseAndThrowErrorIfAny($body), new GroupList());
     }
 
+    public function getAccountBalances(AccountBalanceRequest $request): BalanceResponse{
+        $resp = $this->client->post("account/balances", ['json' => $request->toArray()]);
+        $body = $resp->getBody()->getContents();
+
+        return $this->mapper->map($this->checkResponseAndThrowErrorIfAny($body), new BalanceResponse());
+    }
+
     public function getAccounts(string $group):AccountList{
         $resp = $this->client->get("group/accounts", ['json' => ['request_id' => 123456, 'group' => $group]]);
         $body = $resp->getBody()->getContents();
@@ -186,11 +194,11 @@ class Mt5Client
         return $this->mapper->map($this->checkResponseAndThrowErrorIfAny($body), new AccountInfoExData());
     }
 
-    public function getBalances(array $logins):BalanceList{
+    public function getBalances(array $logins):BalanceResponse{
         $resp = $this->client->post("account/balances", ['json' => ['request_id' => 123456, 'logins'=> $logins]]);
         $body = $resp->getBody()->getContents();
 
-        return $this->mapper->map($this->checkResponseAndThrowErrorIfAny($body), new BalanceList());
+        return $this->mapper->map($this->checkResponseAndThrowErrorIfAny($body), new BalanceResponse());
     }
 
     public function createAccount(CreateAccountRequest $request):CreateAccount{
