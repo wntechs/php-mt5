@@ -19,6 +19,7 @@ use Ram\WIK\Mt5Request\ChangeCreditRequest;
 use Ram\WIK\Mt5Request\ChangePasswordRequest;
 use Ram\WIK\Mt5Request\CreateAccountRequest;
 use Ram\WIK\Mt5Request\DealHistoryRequest;
+use Ram\WIK\Mt5Request\ModifyAccountRequest;
 use Ram\WIK\Mt5Request\OpenPositionRequest;
 use Ram\WIK\Mt5Request\OrderHistoryRequest;
 use Ram\WIK\Mt5Response\AccountInfo\AccountInfoData;
@@ -30,6 +31,7 @@ use Ram\WIK\Mt5Response\ChangePassword\ChangePassword;
 use Ram\WIK\Mt5Response\CreateAccount\CreateAccount;
 use Ram\WIK\Mt5Response\DealHistory\DealHistory;
 use Ram\WIK\Mt5Response\Groups\GroupList;
+use Ram\WIK\Mt5Response\ModifyAccount\ModifyAccount;
 use Ram\WIK\Mt5Response\OrderHistory\OrderHistory;
 use Ram\WIK\Mt5Response\Positions\Positions;
 
@@ -247,6 +249,13 @@ class Mt5Client
         $body = $resp->getBody()->getContents();
 
         return $this->mapper->map($this->checkResponseAndThrowErrorIfAny($body), new Positions());
+    }
+
+    public function modifyAccount(ModifyAccountRequest $request): ModifyAccount {
+        $resp = $this->client->put("account/" . $request->getLogin(), ['json' => $request->toArray()]);
+        $body = $resp->getBody()->getContents();
+
+        return $this->mapper->map($this->checkResponseAndThrowErrorIfAny($body), new ModifyAccount());
     }
 
 
