@@ -18,9 +18,9 @@ class ChangeCredit extends BaseResponse
 
     /**
      * @param \Ram\WIK\Mt5Response\ChangeCredit\ChangeCreditData $Data
-     * @return ChangeCredit
+     * @return ChangeBalance
      */
-    public function setData(ChangeCreditData $Data): ChangeCredit
+    public function setData(ChangeCreditData $Data): ChangeBalance
     {
         $this->Data = $Data;
         return $this;

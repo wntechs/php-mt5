@@ -15,6 +15,7 @@ use Psr\Http\Message\RequestInterface;
 use Ram\WIK\Mt5Request\AccountBalanceRequest;
 use Ram\WIK\Mt5Request\AccountInfoExRequest;
 use Ram\WIK\Mt5Request\AccountInfoRequest;
+use Ram\WIK\Mt5Request\ChangeBalanceRequest;
 use Ram\WIK\Mt5Request\ChangeCreditRequest;
 use Ram\WIK\Mt5Request\ChangePasswordRequest;
 use Ram\WIK\Mt5Request\CreateAccountRequest;
@@ -26,6 +27,7 @@ use Ram\WIK\Mt5Response\AccountInfo\AccountInfoData;
 use Ram\WIK\Mt5Response\AccountInfoEx\AccountInfoExData;
 use Ram\WIK\Mt5Response\Accounts\AccountList;
 use Ram\WIK\Mt5Response\Balances\BalanceResponse;
+use Ram\WIK\Mt5Response\ChangeBalance\ChangeBalance;
 use Ram\WIK\Mt5Response\ChangeCredit\ChangeCredit;
 use Ram\WIK\Mt5Response\ChangePassword\ChangePassword;
 use Ram\WIK\Mt5Response\CreateAccount\CreateAccount;
@@ -242,6 +244,14 @@ class Mt5Client
         $body = $resp->getBody()->getContents();
 
         return $this->mapper->map($this->checkResponseAndThrowErrorIfAny($body), new ChangeCredit());
+    }
+
+    public function changeBalance(ChangeBalanceRequest $request): ChangeBalance{
+
+        $resp = $this->client->post("user/{$request->getLogin()}/change-balance", ['json' => $request->toArray()]);
+        $body = $resp->getBody()->getContents();
+
+        return $this->mapper->map($this->checkResponseAndThrowErrorIfAny($body), new ChangeBalance());
     }
 
     public function getOpenPositions(OpenPositionRequest $request): Positions {
