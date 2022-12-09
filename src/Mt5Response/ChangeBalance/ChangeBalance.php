@@ -9,15 +9,15 @@ class ChangeBalance extends BaseResponse
     protected ChangeBalanceData $Data;
 
     /**
-     * @return \Ram\WIK\Mt5Response\ChangeBalance\ChangeBalanceData
+     * @return ChangeBalanceData
      */
-    public function getData(): ChangeBalance
+    public function getData(): ChangeBalanceData
     {
         return $this->Data;
     }
 
     /**
-     * @param \Ram\WIK\Mt5Response\ChangeBalance\ChangeBalanceData $Data
+     * @param ChangeBalanceData $Data
      * @return ChangeBalance
      */
     public function setData(ChangeBalanceData $Data): ChangeBalance
